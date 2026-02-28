@@ -11,6 +11,8 @@ import { useToast } from "@/hooks/use-toast";
 
 interface AnalysisResult {
   score: number;
+  quickWin?: string;
+  quickFix?: string;
   corrections: string[];
   praise: string[];
   tips: string[];
@@ -157,6 +159,24 @@ const UploadPage = () => {
             <div className="flex justify-center py-4">
               <ScoreGauge score={result.score} />
             </div>
+
+            {/* Quick Studio Summary */}
+            {(result.quickWin || result.quickFix) && (
+              <div className="grid grid-cols-2 gap-3">
+                {result.quickWin && (
+                  <div className="rounded-lg bg-score-green/10 border border-score-green/20 p-3 text-center">
+                    <CheckCircle2 className="h-4 w-4 text-score-green mx-auto mb-1" />
+                    <p className="text-sm font-medium text-foreground">{result.quickWin}</p>
+                  </div>
+                )}
+                {result.quickFix && (
+                  <div className="rounded-lg bg-score-red/10 border border-score-red/20 p-3 text-center">
+                    <XCircle className="h-4 w-4 text-score-red mx-auto mb-1" />
+                    <p className="text-sm font-medium text-foreground">{result.quickFix}</p>
+                  </div>
+                )}
+              </div>
+            )}
 
             {result.corrections.length > 0 && (
               <Card>
