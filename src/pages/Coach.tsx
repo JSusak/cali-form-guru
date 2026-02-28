@@ -103,10 +103,14 @@ const CoachPage = () => {
         audio: false,
       });
       streamRef.current = stream;
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-      }
       setIsSessionActive(true);
+
+      // Wait for the video element to render before assigning the stream
+      requestAnimationFrame(() => {
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+        }
+      });
       setSessionEnded(false);
       setFeedback([]);
       setBestScore(null);
