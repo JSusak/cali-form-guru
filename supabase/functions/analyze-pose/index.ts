@@ -92,13 +92,33 @@ serve(async (req) => {
     const aiData = await response.json();
     const content = aiData.choices?.[0]?.message?.content || "";
 
-    // Parse JSON from the AI response
-    const jsonMatch = content.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) {
+    // Parse JSON from the AI response - handle markdown code blocks and other formatting
+    let cleaned = content
+      .replace(/```json\s*/gi, "")
+      .replace(/```\s*/g, "")
+      .trim();
+
+    const jsonStart = cleaned.search(/\{/);
+    const jsonEnd = cleaned.lastIndexOf("}");
+
+    if (jsonStart === -1 || jsonEnd === -1) {
+      console.error("Raw AI response:", content);
       throw new Error("Failed to parse AI response");
     }
 
-    const parsed = JSON.parse(jsonMatch[0]);
+    cleaned = cleaned.substring(jsonStart, jsonEnd + 1);
+
+    let parsed: any;
+    try {
+      parsed = JSON.parse(cleaned);
+    } catch {
+      // Fix trailing commas and control characters
+      cleaned = cleaned
+        .replace(/,\s*}/g, "}")
+        .replace(/,\s*]/g, "]")
+        .replace(/[\x00-\x1F\x7F]/g, "");
+      parsed = JSON.parse(cleaned);
+    }
 
     return new Response(JSON.stringify(parsed), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
