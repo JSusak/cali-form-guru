@@ -13,10 +13,10 @@ const Index = () => {
         transition={{ duration: 0.6 }}
       >
         <h1 className="text-5xl font-display font-bold tracking-tight mb-3">
-          Form<span className="text-primary">Check</span> AI
+          Cali<span className="text-primary">Buddy</span>
         </h1>
         <p className="text-lg text-muted-foreground max-w-md mx-auto">
-          AI-powered pose analysis for calisthenics, aerial, and pole athletes
+          Your personalised calisthenics &amp; aerial coach, anywhere and everywhere!
         </p>
       </motion.div>
 
