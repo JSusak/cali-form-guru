@@ -1,0 +1,7 @@
+project_id = "zzwncylgtlyjbjktueig"
+
+[functions.analyze-pose]
+verify_jwt = false
+
+[functions.text-to-speech]
+verify_jwt = false
