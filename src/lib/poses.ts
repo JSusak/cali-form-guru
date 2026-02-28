@@ -16,6 +16,7 @@ export const poses: Pose[] = [
   { id: "human-flag", name: "Human Flag", category: "calisthenics" },
   { id: "muscle-up", name: "Muscle Up", category: "calisthenics" },
   { id: "pistol-squat", name: "Pistol Squat", category: "calisthenics" },
+  { id: "one-arm-pullup", name: "One-Arm Pull-Up", category: "calisthenics" },
   // Aerial
   { id: "straddle-back", name: "Straddle Back Balance", category: "aerial" },
   { id: "hip-key", name: "Hip Key", category: "aerial" },
