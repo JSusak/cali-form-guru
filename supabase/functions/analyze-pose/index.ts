@@ -34,8 +34,10 @@ serve(async (req) => {
       userPrompt = `The athlete is practicing: ${poseName}. Analyze this camera frame and give ONE short sentence of real-time coaching feedback. Also provide a score. Respond as JSON: {"feedback":"...","score":NUMBER}`;
     } else {
       userPrompt = `The athlete is attempting: ${poseName}. Analyze their form in detail. Respond as JSON:
-{"score":NUMBER,"corrections":["..."],"praise":["..."],"tips":["..."]}
+{"score":NUMBER,"quickWin":"...","quickFix":"...","corrections":["..."],"praise":["..."],"tips":["..."]}
 - score: 0-100 rating
+- quickWin: ONE short sentence (max 10 words) summarizing what they did best
+- quickFix: ONE short sentence (max 10 words) summarizing the #1 thing to fix
 - corrections: 2-4 specific things to fix
 - praise: 1-3 things done well
 - tips: 2-3 actionable improvement suggestions`;
